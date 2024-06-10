@@ -1,0 +1,80 @@
+version: '3.6'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "homeassistant/home-assistant:2024.6"
+    #image: "homeassistant/home-assistant:latest"
+    volumes:
+      - /home/shima/projects/home_assistant_docker/volumes/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "8123:8123"
+
+  #VSCode
+  vscode:
+    container_name: vscode
+    image: codercom/code-server
+    volumes:
+      # Set <project dir> to the directory you want to open in VS Code.
+      - /home/shima/projects/home_assistant_docker/volumes:/config
+      # <vs code config> should point to a local dir where vs code stores its data.
+      - /home/shima/projects/home_assistant_docker/volumes/vscode:/home/coder/.local/share/code-server
+    ports:
+      - "8443:8080"
+    command: code-server --auth none --disable-telemetry /config
+    restart: unless-stopped
+  
+  #Mosquitto
+  mosquitto:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+      # This port is for Webhooks
+      - "9001:9001"
+    volumes:
+      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/config:/mosquitto/config
+      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/data:/mosquitto/data
+      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/log:/mosquitto/log
+      
+  #ESPHome 
+  esphome:
+    container_name: esphome
+    image: esphome/esphome
+    ports:
+      - "6052:6052"
+    volumes:
+      # Update PATH_TO_YOUR_CONFIG, the :rw gives the container Read/Write access
+      - /home/shima/projects/home_assistant_docker/volumes/esphome/config:/config:rw
+      # Use local time for logging timestamps
+      - /etc/localtime:/etc/localtime:ro
+    # You do have to map a serial port here. Determine your port and uncomment.
+    #devices:
+    #  - /dev/ttyAMC0:/dev/ttyAMC0
+    restart: always
+
+  #LocalAI
+  localai_api:
+    # See https://localai.io/basics/getting_started/#container-images for
+    # a list of available container images (or build your own with the provided Dockerfile)
+    # Available images with CUDA, ROCm, SYCL
+    # Image list (quay.io): https://quay.io/repository/go-skynet/local-ai?tab=tags
+    # Image list (dockerhub): https://hub.docker.com/r/localai/localai
+    image: localai/localai:v2.4.0-ffmpeg-core
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      - MODELS_PATH=/models
+      - DEBUG=true
+    volumes:
+      - /home/shima/projects/home_assistant_docker/volumes/localai/models:/models:cached
+      - /home/shima/projects/home_assistant_docker/volumes/localai/images/:/tmp/generated/images/
+
+    restart: always
+
+
+
