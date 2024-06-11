@@ -12,18 +12,18 @@ services:
       - "8123:8123"
 
   #VSCode
-  vscode:
-    container_name: vscode
-    image: codercom/code-server
-    volumes:
-      # Set <project dir> to the directory you want to open in VS Code.
-      - ./volumes:/config
-      # <vs code config> should point to a local dir where vs code stores its data.
-      - ./volumes/vscode:/home/coder/.local/share/code-server
-    ports:
-      - "8443:8080"
-    command: code-server --auth none --disable-telemetry /config
-    restart: unless-stopped
+#  vscode:
+#    container_name: vscode
+#    image: codercom/code-server
+#    volumes:
+#      # Set <project dir> to the directory you want to open in VS Code.
+#      - ./volumes:/config
+#      # <vs code config> should point to a local dir where vs code stores its data.
+#      - ./volumes/vscode:/home/coder/.local/share/code-server
+#    ports:
+#      - "8443:8080"
+#    command: code-server --auth none --disable-telemetry /config
+#    restart: unless-stopped
   
   #Mosquitto
   mosquitto:
@@ -63,7 +63,7 @@ services:
     # Image list (dockerhub): https://hub.docker.com/r/localai/localai
     image: localai/localai:v2.4.0-ffmpeg-core
     ports:
-      - 8081:8080
+      - 8080:8080
     env_file:
       - .env
     environment:
