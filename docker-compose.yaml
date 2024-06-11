@@ -13,8 +13,7 @@ services:
     privileged: true
     ports:
       - "8123:8123"
-    networks:
-      - homeassistant_network
+    network_mode: host
 
   #VSCode
   vscode:
@@ -29,8 +28,7 @@ services:
       - "8443:8080"
     command: code-server --auth none --disable-telemetry /config
     restart: unless-stopped
-    networks:
-      - homeassistant_network
+    network_mode: host
   
   #Mosquitto
   mosquitto:
@@ -44,8 +42,7 @@ services:
       - ./volumes/mosquitto/config:/mosquitto/config
       - ./volumes/mosquitto/data:/mosquitto/data
       - ./volumes/mosquitto/log:/mosquitto/log
-    networks:
-      - homeassistant_network
+    network_mode: host
 
   #ESPHome 
   esphome:
@@ -62,8 +59,7 @@ services:
     #devices:
     #  - /dev/ttyAMC0:/dev/ttyAMC0
     restart: always
-    networks:
-      - homeassistant_network
+    network_mode: host
 
   #LocalAI
   localai:
@@ -88,12 +84,21 @@ services:
       - ./volumes/localai/models:/models:cached
       - ./volumes/localai/images/:/tmp/generated/images/
     restart: always
-    networks:
-      - homeassistant_network
+    network_mode: host
 
-networks:
-  homeassistant_network:
-    driver: bridge
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce
+    ports:
+      - "9000:9000/tcp"
+    environment:
+      - TZ=Europe/London
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer:/data
+    restart: always
+    network_mode: host
+
 
 
 
