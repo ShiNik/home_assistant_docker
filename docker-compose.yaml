@@ -18,7 +18,7 @@ services:
 
   #VSCode
   vscode:
-    container_name: homeassistant
+    container_name: vscode
     image: codercom/code-server
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
