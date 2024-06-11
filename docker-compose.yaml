@@ -3,7 +3,7 @@ services:
   homeassistant:
     image: "homeassistant/home-assistant:2024.6"
     depends_on:
-      localai_api:
+      localai:
         condition: service_healthy
     volumes:
       - ./volumes/homeassistant:/config
