@@ -3,6 +3,9 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "homeassistant/home-assistant:2024.6"
+    depends_on:
+      localai_api:
+        condition: service_healthy
     volumes:
       - ./volumes/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
@@ -62,10 +65,13 @@ services:
     # Image list (quay.io): https://quay.io/repository/go-skynet/local-ai?tab=tags
     # Image list (dockerhub): https://hub.docker.com/r/localai/localai
     image: localai/localai:v2.4.0-ffmpeg-core
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/readyz" ]
+      interval: 1m
+      timeout: 20m
+      retries: 5
     ports:
       - 8080:8080
-    env_file:
-      - .env
     environment:
       - MODELS_PATH=/models
       - DEBUG=true
