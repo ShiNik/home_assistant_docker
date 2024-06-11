@@ -3,9 +3,8 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "homeassistant/home-assistant:2024.6"
-    #image: "homeassistant/home-assistant:latest"
     volumes:
-      - /home/shima/projects/home_assistant_docker/volumes/homeassistant:/config
+      - ./volumes/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
@@ -18,9 +17,9 @@ services:
     image: codercom/code-server
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
-      - /home/shima/projects/home_assistant_docker/volumes:/config
+      - ./volumes:/config
       # <vs code config> should point to a local dir where vs code stores its data.
-      - /home/shima/projects/home_assistant_docker/volumes/vscode:/home/coder/.local/share/code-server
+      - ./volumes/vscode:/home/coder/.local/share/code-server
     ports:
       - "8443:8080"
     command: code-server --auth none --disable-telemetry /config
@@ -35,9 +34,9 @@ services:
       # This port is for Webhooks
       - "9001:9001"
     volumes:
-      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/config:/mosquitto/config
-      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/data:/mosquitto/data
-      - /home/shima/projects/home_assistant_docker/volumes/mosquitto/log:/mosquitto/log
+      - ./volumes/mosquitto/config:/mosquitto/config
+      - ./volumes/mosquitto/data:/mosquitto/data
+      - ./volumes/mosquitto/log:/mosquitto/log
       
   #ESPHome 
   esphome:
@@ -47,7 +46,7 @@ services:
       - "6052:6052"
     volumes:
       # Update PATH_TO_YOUR_CONFIG, the :rw gives the container Read/Write access
-      - /home/shima/projects/home_assistant_docker/volumes/esphome/config:/config:rw
+      - ./volumes/esphome/config:/config:rw
       # Use local time for logging timestamps
       - /etc/localtime:/etc/localtime:ro
     # You do have to map a serial port here. Determine your port and uncomment.
@@ -64,15 +63,15 @@ services:
     # Image list (dockerhub): https://hub.docker.com/r/localai/localai
     image: localai/localai:v2.4.0-ffmpeg-core
     ports:
-      - 8080:8080
+      - 8081:8080
     env_file:
       - .env
     environment:
       - MODELS_PATH=/models
       - DEBUG=true
     volumes:
-      - /home/shima/projects/home_assistant_docker/volumes/localai/models:/models:cached
-      - /home/shima/projects/home_assistant_docker/volumes/localai/images/:/tmp/generated/images/
+      - ./volumes/localai/models:/models:cached
+      - ./volumes/localai/images/:/tmp/generated/images/
 
     restart: always
 

@@ -1,0 +1,42 @@
+2024-06-08 22:28:10.486 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration google_cloud_stt which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-08 22:28:10.486 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration extended_openai_conversation which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-08 22:28:10.487 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-08 22:28:11.618 WARNING (MainThread) [homeassistant.helpers.frame] Detected that custom integration 'hacs' accesses hass.components.frontend. This is deprecated and will stop working in Home Assistant 2024.9, it should be updated to import functions used from frontend directly at custom_components/hacs/frontend.py, line 68: hass.components.frontend.async_register_built_in_panel(, please create a bug report at https://github.com/hacs/integration/issues
+2024-06-08 22:28:12.351 WARNING (MainThread) [homeassistant.util.loop] Detected blocking call to open inside the event loop by custom integration 'extended_openai_conversation' at custom_components/extended_openai_conversation/helpers.py, line 150: await client.models.list(timeout=10) (offender: /usr/local/lib/python3.12/site-packages/distro/distro.py, line 1099: with open(self.os_release_file, encoding="utf-8") as release_file:), please create a bug report at https://github.com/jekalmin/extended_openai_conversation/issues
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/src/homeassistant/homeassistant/__main__.py", line 223, in <module>
+    sys.exit(main())
+  File "/usr/src/homeassistant/homeassistant/__main__.py", line 209, in main
+    exit_code = runner.run(runtime_conf)
+  File "/usr/src/homeassistant/homeassistant/runner.py", line 190, in run
+    return loop.run_until_complete(setup_and_run_hass(runtime_config))
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 672, in run_until_complete
+    self.run_forever()
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 639, in run_forever
+    self._run_once()
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1988, in _run_once
+    handle._run()
+  File "/usr/local/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 165, in async_setup_component
+    result = await _async_setup_component(hass, domain, config)
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 447, in _async_setup_component
+    await asyncio.gather(
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 449, in <genexpr>
+    create_eager_task(
+  File "/usr/src/homeassistant/homeassistant/util/async_.py", line 37, in create_eager_task
+    return Task(coro, loop=loop, name=name, eager_start=True)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 742, in async_setup_locked
+    await self.async_setup(hass, integration=integration)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 594, in async_setup
+    result = await component.async_setup_entry(hass, self)
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 100, in async_setup_entry
+    await validate_authentication(
+  File "/config/custom_components/extended_openai_conversation/helpers.py", line 150, in validate_authentication
+    await client.models.list(timeout=10)
+
+2024-06-08 22:28:17.054 ERROR (MainThread) [homeassistant.components.mqtt.client] Failed to connect to MQTT server due to exception: timed out
+2024-06-08 22:28:17.062 WARNING (MainThread) [homeassistant.helpers.frame] Detected that custom integration 'hacs' accesses hass.helpers.event. This is deprecated and will stop working in Home Assistant 2024.11, it should be updated to import functions used from event directly at custom_components/hacs/base.py, line 642: self.hass.helpers.event.async_track_time_interval(, please create a bug report at https://github.com/hacs/integration/issues
+2024-06-08 22:29:13.730 ERROR (MainThread) [custom_components.extended_openai_conversation] Error code: 500 - {'error': {'code': 500, 'message': 'Unrecognized schema: map[]', 'type': ''}}

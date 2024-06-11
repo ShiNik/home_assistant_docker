@@ -140,44 +140,14 @@
       },
       {
         "data": {
-          "api_key": "CHANGEME",
-          "skip_authentication": false,
-          "name": "ChatGpt"
-        },
-        "disabled_by": null,
-        "domain": "extended_openai_conversation",
-        "entry_id": "5b8b63436ace38cb5f3f4e7913733afd",
-        "minor_version": 1,
-        "options": {
-          "prompt": "You possess the knowledge of all the universe, answer any question given to you truthfully and to your fullest ability.  \nYou are also a smart home manager who has been given permission to control my smart home which is powered by Home Assistant.\nI will provide you information about my smart home along, you can truthfully make corrections or respond in polite and concise language.\n\nCurrent Time: {{now()}}\n\nAvailable Devices:\n```csv\nentity_id,name,state,aliases\n{% for entity in exposed_entities -%}\n{{ entity.entity_id }},{{ entity.name }},{{ entity.state }},{{entity.aliases | join('/')}}\n{% endfor -%}\n```\n\nThe current state of devices is provided in Available Devices.\nOnly use the execute_services function when smart home actions are requested.\nDo not tell me what you're thinking about doing either, just do it.\nIf I ask you about the current state of the home, or many devices I have, or how many devices are in a specific state, just respond with the accurate information but do not call the execute_services function.\nIf I ask you what time or date it is be sure to respond in a human readable format.\nIf you don't have enough information to execute a smart home command then specify what other information you need",
-          "chat_model": "gpt-3.5-turbo-1106",
-          "max_tokens": 150,
-          "top_p": 1.0,
-          "temperature": 0.5,
-          "max_function_calls_per_conversation": 1,
-          "functions": "- spec:\n    name: execute_services\n    description: Use this function to execute service of devices in Home Assistant.\n    parameters:\n      type: object\n      properties:\n        list:\n          type: array\n          items:\n            type: object\n            properties:\n              domain:\n                type: string\n                description: The domain of the service\n              service:\n                type: string\n                description: The service to be called\n              service_data:\n                type: object\n                description: The service data object to indicate what to control.\n                properties:\n                  entity_id:\n                    type: string\n                    description: The entity_id retrieved from available devices. It\n                      must start with domain, followed by dot character.\n                required:\n                - entity_id\n            required:\n            - domain\n            - service\n            - service_data\n  function:\n    type: native\n    name: execute_service",
-          "attach_username": false,
-          "use_tools": false,
-          "context_threshold": 13000,
-          "context_truncate_strategy": "clear"
-        },
-        "pref_disable_new_entities": false,
-        "pref_disable_polling": false,
-        "source": "user",
-        "title": "ChatGpt",
-        "unique_id": null,
-        "version": 1
-      },
-      {
-        "data": {
-          "api_key": "123",
-          "base_url": "http://172.20.0.5:8080/v1",
+          "api_key": "1234",
+          "base_url": "http://172.22.0.5:8080/v1",
           "skip_authentication": false,
           "name": "LocalAI LLM"
         },
         "disabled_by": null,
         "domain": "extended_openai_conversation",
-        "entry_id": "29edfeb680aa94db9772d3a352fe14ed",
+        "entry_id": "a410086c427906cacd561353938653a1",
         "minor_version": 1,
         "options": {
           "prompt": "I want you to act as smart home manager of Home Assistant.\nI will provide information of smart home along with a question, you will truthfully make correction or answer using information provided in one sentence in everyday language.\n\nCurrent Time: {{now()}}\n\nAvailable Devices:\n```csv\nentity_id,name,state,aliases\n{% for entity in exposed_entities -%}\n{{ entity.entity_id }},{{ entity.name }},{{ entity.state }},{{entity.aliases | join('/')}}\n{% endfor -%}\n```\n\nThe current state of devices is provided in available devices.\nUse execute_services function only for requested action, not for current states.\nDo not execute service without user's confirmation.\nDo not restate or appreciate what user says, rather make a quick inquiry.",

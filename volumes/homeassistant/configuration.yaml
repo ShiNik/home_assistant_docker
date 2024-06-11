@@ -20,10 +20,10 @@ panel_iframe:
     title: "Portainer"
     url: "https://localhost:9443/#!/home"
     icon: mdi:docker
-  vscode:
-    title: "VSCode"
-    url: "http://localhost:8080/"
-    icon: mdi:microsoft-visual-studio-code
+#  vscode:
+#    title: "VSCode"
+#    url: "http://172.22.0.6:8080/"
+#    icon: mdi:microsoft-visual-studio-code
   esphome:
     title: "ESPHome"
     url: "http://localhost:6052"
