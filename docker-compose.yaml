@@ -13,7 +13,7 @@ services:
     ports:
       - "8123:8123"
     networks:
-      - custom_network
+      - custom_homeassistant_network
 
   #VSCode
   vscode:
@@ -28,7 +28,7 @@ services:
     command: code-server --auth none --disable-telemetry /config
     restart: unless-stopped
     networks:
-      - custom_network
+      - custom_homeassistant_network
   
   #Mosquitto
   mqtt:
@@ -42,7 +42,7 @@ services:
       - ./volumes/mosquitto/data:/mosquitto/data
       - ./volumes/mosquitto/log:/mosquitto/log
     networks:
-      - custom_network
+      - custom_homeassistant_network
 
   #ESPHome 
   esphome:
@@ -59,7 +59,7 @@ services:
     #  - /dev/ttyAMC0:/dev/ttyAMC0
     restart: always
     networks:
-      - custom_network
+      - custom_homeassistant_network
 
   #LocalAI
   localai:
@@ -84,10 +84,10 @@ services:
       - ./volumes/localai/images/:/tmp/generated/images/
     restart: always
     networks:
-      - custom_network
+      - custom_homeassistant_network
 
 networks:
-  custom_network:
+  custom_homeassistant_network:
     driver: bridge
 
 
