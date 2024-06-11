@@ -1,6 +1,7 @@
 version: '3.6'
 services:
   homeassistant:
+    container_name: homeassistant
     image: "homeassistant/home-assistant:2024.6"
     depends_on:
       localai:
@@ -13,10 +14,11 @@ services:
     ports:
       - "8123:8123"
     networks:
-      - custom_homeassistant_network
+      - homeassistant_network
 
   #VSCode
   vscode:
+    container_name: homeassistant
     image: codercom/code-server
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
@@ -28,10 +30,11 @@ services:
     command: code-server --auth none --disable-telemetry /config
     restart: unless-stopped
     networks:
-      - custom_homeassistant_network
+      - homeassistant_network
   
   #Mosquitto
-  mqtt:
+  mosquitto:
+    container_name: mqtt
     image: eclipse-mosquitto
     ports:
       - "1883:1883"
@@ -42,10 +45,11 @@ services:
       - ./volumes/mosquitto/data:/mosquitto/data
       - ./volumes/mosquitto/log:/mosquitto/log
     networks:
-      - custom_homeassistant_network
+      - homeassistant_network
 
   #ESPHome 
   esphome:
+    container_name: mqtt
     image: esphome/esphome
     ports:
       - "6052:6052"
@@ -59,7 +63,7 @@ services:
     #  - /dev/ttyAMC0:/dev/ttyAMC0
     restart: always
     networks:
-      - custom_homeassistant_network
+      - homeassistant_network
 
   #LocalAI
   localai:
@@ -68,6 +72,7 @@ services:
     # Available images with CUDA, ROCm, SYCL
     # Image list (quay.io): https://quay.io/repository/go-skynet/local-ai?tab=tags
     # Image list (dockerhub): https://hub.docker.com/r/localai/localai
+    container_name: localai
     image: localai/localai:v2.4.0-ffmpeg-core
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/readyz" ]
@@ -84,10 +89,10 @@ services:
       - ./volumes/localai/images/:/tmp/generated/images/
     restart: always
     networks:
-      - custom_homeassistant_network
+      - homeassistant_network
 
 networks:
-  custom_homeassistant_network:
+  homeassistant_network:
     driver: bridge
 
 
