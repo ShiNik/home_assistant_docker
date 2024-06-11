@@ -49,7 +49,7 @@ services:
 
   #ESPHome 
   esphome:
-    container_name: mqtt
+    container_name: esphome
     image: esphome/esphome
     ports:
       - "6052:6052"
