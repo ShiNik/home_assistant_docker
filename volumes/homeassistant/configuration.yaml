@@ -20,6 +20,7 @@ panel_iframe:
     title: "Portainer"
     url: "https://localhost:9000/#!/home"
     icon: mdi:docker
+    require_admin: true
   vscode:
     title: "VSCode"
     url: "http://localhost:8443/"
