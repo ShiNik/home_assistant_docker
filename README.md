@@ -24,16 +24,15 @@ Use Docker Compose to start all services in the background.
 ```
 make run
 ```
-
 ## Accessing Services
 LocalAI Model List
 To find the list of available models in terminal type:
 ```
-curl http://localhost:8081/v1/models
+curl http://localhost:8080/v1/models
 ```
 To access Portainer, open your browser and go to:
 ```
-https://localhost:9000/
+http://localhost:9000/
 ```
 To access Home Assistant, open your browser and go to:
 ```
@@ -51,3 +50,8 @@ Services included in this setup:
 - LocalAI: http://localhost:8080
 - Portainer: https://localhost:9000/
 
+To stop Docker Services
+Use Docker Compose to stop all services in the background.
+```
+make stop
+```

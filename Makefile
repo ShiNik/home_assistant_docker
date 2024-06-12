@@ -23,9 +23,9 @@ create-venv: requirements.txt
 
 
 # Rule to run Docker services
-run: setup
+run:
 	@echo "Starting Docker services..."
-	docker compose up -d
+	sudo docker compose up -d
 	@echo "Docker services started."
 
 # Rule to stop Docker services
