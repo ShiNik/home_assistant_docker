@@ -11,33 +11,33 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
-    ports:
-      - "8123:8123"
+#    ports:
+#      - "8123:8123"
     network_mode: host
 
-  #VSCode
-  vscode:
-    container_name: vscode
-    image: codercom/code-server
-    volumes:
-      # Set <project dir> to the directory you want to open in VS Code.
-      - ./volumes:/config
-      # <vs code config> should point to a local dir where vs code stores its data.
-      - ./volumes/vscode:/home/coder/.local/share/code-server
-    ports:
-      - "8443:8080"
-    command: code-server --auth none --disable-telemetry /config
-    restart: unless-stopped
-    network_mode: host
+#  #VSCode
+#  vscode:
+#    container_name: vscode
+#    image: codercom/code-server
+#    volumes:
+#      # Set <project dir> to the directory you want to open in VS Code.
+#      - ./volumes:/config
+#      # <vs code config> should point to a local dir where vs code stores its data.
+#      - ./volumes/vscode:/home/coder/.local/share/code-server
+#    ports:
+#      - "8443:8080"
+#    command: code-server --auth none --disable-telemetry /config
+#    restart: unless-stopped
+#    network_mode: host
   
   #Mosquitto
   mosquitto:
     container_name: mqtt
     image: eclipse-mosquitto
-    ports:
-      - "1883:1883"
-      # This port is for Webhooks
-      - "9001:9001"
+#    ports:
+#      - "1883:1883"
+#      # This port is for Webhooks
+#      - "9001:9001"
     volumes:
       - ./volumes/mosquitto/config:/mosquitto/config
       - ./volumes/mosquitto/data:/mosquitto/data
@@ -75,8 +75,8 @@ services:
       interval: 1m
       timeout: 60m
       retries: 5
-    ports:
-      - 8081:8080
+#    ports:
+#      - 8081:8080
     environment:
       - MODELS_PATH=/models
       - DEBUG=true
@@ -89,8 +89,8 @@ services:
   portainer:
     container_name: portainer
     image: portainer/portainer-ce
-    ports:
-      - "9000:9000/tcp"
+#    ports:
+#      - "9000:9000/tcp"
     environment:
       - TZ=Europe/London
     volumes:

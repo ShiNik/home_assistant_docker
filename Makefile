@@ -1,6 +1,6 @@
 # Makefile
 
-.PHONY: setup  create-venv
+.PHONY: setup  create-venv run
 
 VENV_DIR=.venv
 PYTHON=$(VENV_DIR)/bin/python3
@@ -20,3 +20,9 @@ create-venv: requirements.txt
 	@echo "Installing dependencies..."
 	. $(VENV_DIR)/bin/activate && pip install -r requirements.txt
 	@echo "Virtual environment setup complete."
+
+
+run:
+	@echo "Starting Docker containers..."
+	sudo docker compose up -d
+	@echo "Docker containers started."
