@@ -1,6 +1,6 @@
 # Makefile
 
-.PHONY: setup  create-venv run
+.PHONY: setup  create-venv run stop
 
 VENV_DIR=.venv
 PYTHON=$(VENV_DIR)/bin/python3
@@ -22,7 +22,14 @@ create-venv: requirements.txt
 	@echo "Virtual environment setup complete."
 
 
-run:
-	@echo "Starting Docker containers..."
-	sudo docker compose up -d
-	@echo "Docker containers started."
+# Rule to run Docker services
+run: setup
+	@echo "Starting Docker services..."
+	docker compose up -d
+	@echo "Docker services started."
+
+# Rule to stop Docker services
+stop:
+	@echo "Stopping Docker services..."
+	sudo docker compose down
+	@echo "Docker services stopped."
