@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.portainer",
+  "data": {
+    "config": {
+      "strategy": {
+        "type": "iframe",
+        "url": "https://localhost:9443/#!/home"
+      }
+    }
+  }
+}

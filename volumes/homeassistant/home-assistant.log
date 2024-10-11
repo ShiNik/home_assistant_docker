@@ -1,0 +1,69 @@
+2024-06-09 10:43:33.104 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration google_cloud_stt which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-09 10:43:33.105 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration extended_openai_conversation which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-09 10:43:33.105 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2024-06-09 10:43:33.289 WARNING (Recorder) [homeassistant.components.recorder.util] The system could not validate that the sqlite3 database at //config/home-assistant_v2.db was shutdown cleanly
+2024-06-09 10:43:33.305 WARNING (Recorder) [homeassistant.components.recorder.util] Ended unfinished session (id=16 from 2024-06-09 02:28:10.685539)
+2024-06-09 10:43:35.753 WARNING (MainThread) [homeassistant.helpers.frame] Detected that custom integration 'hacs' accesses hass.components.frontend. This is deprecated and will stop working in Home Assistant 2024.9, it should be updated to import functions used from frontend directly at custom_components/hacs/frontend.py, line 68: hass.components.frontend.async_register_built_in_panel(, please create a bug report at https://github.com/hacs/integration/issues
+2024-06-09 10:43:36.479 WARNING (MainThread) [homeassistant.util.loop] Detected blocking call to open inside the event loop by custom integration 'extended_openai_conversation' at custom_components/extended_openai_conversation/helpers.py, line 150: await client.models.list(timeout=10) (offender: /usr/local/lib/python3.12/site-packages/distro/distro.py, line 1099: with open(self.os_release_file, encoding="utf-8") as release_file:), please create a bug report at https://github.com/jekalmin/extended_openai_conversation/issues
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/usr/src/homeassistant/homeassistant/__main__.py", line 223, in <module>
+    sys.exit(main())
+  File "/usr/src/homeassistant/homeassistant/__main__.py", line 209, in main
+    exit_code = runner.run(runtime_conf)
+  File "/usr/src/homeassistant/homeassistant/runner.py", line 190, in run
+    return loop.run_until_complete(setup_and_run_hass(runtime_config))
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 672, in run_until_complete
+    self.run_forever()
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 639, in run_forever
+    self._run_once()
+  File "/usr/local/lib/python3.12/asyncio/base_events.py", line 1988, in _run_once
+    handle._run()
+  File "/usr/local/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 165, in async_setup_component
+    result = await _async_setup_component(hass, domain, config)
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 447, in _async_setup_component
+    await asyncio.gather(
+  File "/usr/src/homeassistant/homeassistant/setup.py", line 449, in <genexpr>
+    create_eager_task(
+  File "/usr/src/homeassistant/homeassistant/util/async_.py", line 37, in create_eager_task
+    return Task(coro, loop=loop, name=name, eager_start=True)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 742, in async_setup_locked
+    await self.async_setup(hass, integration=integration)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 594, in async_setup
+    result = await component.async_setup_entry(hass, self)
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 100, in async_setup_entry
+    await validate_authentication(
+  File "/config/custom_components/extended_openai_conversation/helpers.py", line 150, in validate_authentication
+    await client.models.list(timeout=10)
+
+2024-06-09 10:43:40.906 ERROR (MainThread) [homeassistant.components.mqtt.client] Failed to connect to MQTT server due to exception: timed out
+2024-06-09 10:43:41.980 WARNING (MainThread) [homeassistant.helpers.frame] Detected that custom integration 'hacs' accesses hass.helpers.event. This is deprecated and will stop working in Home Assistant 2024.11, it should be updated to import functions used from event directly at custom_components/hacs/base.py, line 642: self.hass.helpers.event.async_track_time_interval(, please create a bug report at https://github.com/hacs/integration/issues
+2024-06-09 12:54:27.509 ERROR (MainThread) [custom_components.extended_openai_conversation] Connection error.
+2024-06-09 13:00:15.089 ERROR (MainThread) [custom_components.extended_openai_conversation] Connection error.
+2024-06-09 13:21:28.433 ERROR (MainThread) [custom_components.extended_openai_conversation] Connection error.
+2024-06-09 14:29:05.968 WARNING (MainThread) [homeassistant.helpers.entity] Updating state for sensor.current_version (<class 'homeassistant.components.version.sensor.VersionSensorEntity'>) took 1.190 seconds. Please create a bug report at https://github.com/home-assistant/core/issues?q=is%3Aopen+is%3Aissue+label%3A%22integration%3A+version%22
+2024-06-09 15:01:51.618 ERROR (MainThread) [custom_components.extended_openai_conversation] Service home-assistant.switch not found
+Traceback (most recent call last):
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 196, in async_process
+    query_response = await self.query(user_input, messages, exposed_entities, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 380, in query
+    return await self.execute_function_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 406, in execute_function_call
+    return await self.execute_function(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/config/custom_components/extended_openai_conversation/__init__.py", line 432, in execute_function
+    result = await function_executor.execute(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/config/custom_components/extended_openai_conversation/helpers.py", line 203, in execute
+    return await self.execute_service(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/config/custom_components/extended_openai_conversation/helpers.py", line 278, in execute_service
+    await self.execute_service_single(
+  File "/config/custom_components/extended_openai_conversation/helpers.py", line 253, in execute_service_single
+    raise ServiceNotFound(domain, service)
+homeassistant.exceptions.ServiceNotFound: Service home-assistant.switch not found

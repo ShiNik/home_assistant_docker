@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "minor_version": 5,
+  "key": "core.device_registry",
+  "data": {
+    "devices": [
+      {"area_id":null,"config_entries":["8d04e5472f8c48cac3f4add3f2c0979b"],"configuration_url":null,"connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"7da0d9683f20800aef8cf6eae82fddb4","identifiers":[["sun","8d04e5472f8c48cac3f4add3f2c0979b"]],"labels":[],"manufacturer":null,"model":null,"name_by_user":null,"name":"Sun","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["1f86764d89551123965353e00e425315"],"configuration_url":"https://www.met.no/en","connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"c497563da06d3cc89fb3446f95d1192b","identifiers":[["met","1f86764d89551123965353e00e425315"]],"labels":[],"manufacturer":"Met.no","model":"Forecast","name_by_user":null,"name":"Forecast","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["89379fec6b2e721e2a982075689d611d"],"configuration_url":null,"connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"1870d99eeddee140b168e718cdc055ab","identifiers":[["Home Assistant","version"]],"labels":[],"manufacturer":"Home Assistant","model":null,"name_by_user":null,"name":"Home Assistant Version","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["68d017dfc4ac592bff9272df64280c1c"],"configuration_url":"homeassistant://hacs","connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"1b0f035f93f598b949a4b68afb0158b7","identifiers":[["hacs","0717a0cd-745c-48fd-9b16-c8534c9704f9-bc944b0f-fd42-4a58-a072-ade38d1444cd"]],"labels":[],"manufacturer":"hacs.xyz","model":"","name_by_user":null,"name":"HACS","serial_number":null,"sw_version":"1.34.0","via_device_id":null},
+      {"area_id":null,"config_entries":["68d017dfc4ac592bff9272df64280c1c"],"configuration_url":"homeassistant://hacs","connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"bc963b5832cb0a560044a08c3a3a5401","identifiers":[["hacs","700780425"]],"labels":[],"manufacturer":"jekalmin","model":"integration","name_by_user":null,"name":"extended_openai_conversation","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["68d017dfc4ac592bff9272df64280c1c"],"configuration_url":"homeassistant://hacs","connections":[],"disabled_by":null,"entry_type":"service","hw_version":null,"id":"1a005b24f6bc6b0f36524eb580859217","identifiers":[["hacs","639020996"]],"labels":[],"manufacturer":"chatziko","model":"integration","name_by_user":null,"name":"Google Cloud Speech-To-Text","serial_number":null,"sw_version":null,"via_device_id":null}
+    ],
+    "deleted_devices": []
+  }
+}

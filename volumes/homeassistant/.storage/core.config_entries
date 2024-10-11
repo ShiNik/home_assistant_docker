@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "core.config_entries",
+  "data": {
+    "entries": [
+      {
+        "data": {},
+        "disabled_by": null,
+        "domain": "sun",
+        "entry_id": "8d04e5472f8c48cac3f4add3f2c0979b",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "import",
+        "title": "Sun",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {},
+        "disabled_by": null,
+        "domain": "shopping_list",
+        "entry_id": "cd6387b2b99d50cbec04c09394cb6881",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "title": "Shopping list",
+        "unique_id": "shopping_list",
+        "version": 1
+      },
+      {
+        "data": {
+          "language": "en",
+          "tld": "com"
+        },
+        "disabled_by": null,
+        "domain": "google_translate",
+        "entry_id": "203be0fa32afb471ff4133142167681d",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "title": "Google Translate text-to-speech",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {},
+        "disabled_by": null,
+        "domain": "radio_browser",
+        "entry_id": "804b69c6681c3d4171ede522c3aa3610",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "title": "Radio Browser",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {
+          "track_home": true
+        },
+        "disabled_by": null,
+        "domain": "met",
+        "entry_id": "1f86764d89551123965353e00e425315",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "onboarding",
+        "title": "Home",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {
+          "name": "",
+          "channel": "stable",
+          "image": "default",
+          "board": "OVA",
+          "version_source": "Local installation",
+          "source": "local"
+        },
+        "disabled_by": null,
+        "domain": "version",
+        "entry_id": "89379fec6b2e721e2a982075689d611d",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "title": "Current Version",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {
+          "broker": "172.18.0.4",
+          "port": 1883,
+          "username": "mqtt-user",
+          "password": "mqtt-user",
+          "discovery": true
+        },
+        "disabled_by": null,
+        "domain": "mqtt",
+        "entry_id": "09badcb1fdb39c507c41d9ca55b09622",
+        "minor_version": 1,
+        "options": {},
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "title": "172.18.0.4",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {
+          "token": "CHANGEME"
+        },
+        "disabled_by": null,
+        "domain": "hacs",
+        "entry_id": "68d017dfc4ac592bff9272df64280c1c",
+        "minor_version": 1,
+        "options": {
+          "experimental": true
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "title": "",
+        "unique_id": null,
+        "version": 1
+      },
+      {
+        "data": {
+          "api_key": "1234",
+          "base_url": "http://172.22.0.5:8080/v1",
+          "skip_authentication": false,
+          "name": "LocalAI LLM"
+        },
+        "disabled_by": null,
+        "domain": "extended_openai_conversation",
+        "entry_id": "a410086c427906cacd561353938653a1",
+        "minor_version": 1,
+        "options": {
+          "prompt": "I want you to act as smart home manager of Home Assistant.\nI will provide information of smart home along with a question, you will truthfully make correction or answer using information provided in one sentence in everyday language.\n\nCurrent Time: {{now()}}\n\nAvailable Devices:\n```csv\nentity_id,name,state,aliases\n{% for entity in exposed_entities -%}\n{{ entity.entity_id }},{{ entity.name }},{{ entity.state }},{{entity.aliases | join('/')}}\n{% endfor -%}\n```\n\nThe current state of devices is provided in available devices.\nUse execute_services function only for requested action, not for current states.\nDo not execute service without user's confirmation.\nDo not restate or appreciate what user says, rather make a quick inquiry.",
+          "chat_model": "llama3-functioncall",
+          "max_tokens": 150,
+          "top_p": 1.0,
+          "temperature": 0.5,
+          "max_function_calls_per_conversation": 1,
+          "functions": "- spec:\n    name: execute_services\n    description: Use this function to execute service of devices in Home Assistant.\n    parameters:\n      type: object\n      properties:\n        list:\n          type: array\n          items:\n            type: object\n            properties:\n              domain:\n                type: string\n                description: The domain of the service\n              service:\n                type: string\n                description: The service to be called\n              service_data:\n                type: object\n                description: The service data object to indicate what to control.\n                properties:\n                  entity_id:\n                    type: string\n                    description: The entity_id retrieved from available devices. It\n                      must start with domain, followed by dot character.\n                required:\n                - entity_id\n            required:\n            - domain\n            - service\n            - service_data\n  function:\n    type: native\n    name: execute_service",
+          "attach_username": false,
+          "use_tools": false,
+          "context_threshold": 13000,
+          "context_truncate_strategy": "clear"
+        },
+        "pref_disable_new_entities": false,
+        "pref_disable_polling": false,
+        "source": "user",
+        "title": "LocalAI LLM",
+        "unique_id": null,
+        "version": 1
+      }
+    ]
+  }
+}

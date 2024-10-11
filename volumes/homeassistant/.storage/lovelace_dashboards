@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_dashboards",
+  "data": {
+    "items": [
+      {
+        "id": "map",
+        "icon": "mdi:map",
+        "title": "Map",
+        "url_path": "map",
+        "show_in_sidebar": true,
+        "mode": "storage",
+        "require_admin": false
+      },
+      {
+        "id": "portainer",
+        "url_path": "portainer",
+        "icon": "mdi:docker",
+        "require_admin": false,
+        "title": "Portainer",
+        "show_in_sidebar": true,
+        "mode": "storage"
+      },
+      {
+        "id": "vscode",
+        "url_path": "vscode",
+        "icon": "mdi:microsoft-visual-studio-code",
+        "require_admin": false,
+        "title": "VSCode",
+        "show_in_sidebar": true,
+        "mode": "storage"
+      },
+      {
+        "id": "esphome",
+        "url_path": "esphome",
+        "icon": "mdi:chip",
+        "require_admin": false,
+        "title": "ESPHome",
+        "show_in_sidebar": true,
+        "mode": "storage"
+      }
+    ]
+  }
+}
